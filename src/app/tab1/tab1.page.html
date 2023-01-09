@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Inicio
+      Request Sorting
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,23 +10,23 @@
 <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
   <ion-item class="primero">
     <ion-label>Min Elements: </ion-label>
-    <ion-input formControlName="number" type="text"></ion-input>
+    <ion-input formControlName="minElements" type="number"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Max Elements: </ion-label>
-    <ion-input formControlName="number" type="text"></ion-input>
+    <ion-input formControlName="maxElements" type="number"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Increment: </ion-label>
-    <ion-input formControlName="number" type="text"></ion-input>
+    <ion-input formControlName="increment" type="number"></ion-input>
   </ion-item>
 </form>
   <ion-list>
     <ion-item>
-      <ion-select placeholder="Algoritmo">
+      <ion-select placeholder="Algorithm">
         <ion-select-option *ngFor="let option of optionEnum | keyvalue" [value]="option.key">{{ option.value }}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
-  <ion-button (click)="submitForm()" type="submit" class="button1"> Enviar </ion-button>
+  <ion-button (click)="submitForm()" type="submit" class="button1"> Submit </ion-button>
 </ion-content>
