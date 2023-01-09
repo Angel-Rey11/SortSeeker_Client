@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { Share } from '@capacitor/share';
+import {FileSharer} from '@byteowls/capacitor-filesharer';
 
 @Component({
   selector: 'app-tab3',
@@ -8,7 +10,7 @@ import { Chart } from 'chart.js/auto';
 })
 export class Tab3Page implements AfterViewInit {
   @ViewChild('lineCanvas') private lineCanvas: ElementRef;
-  lineChart: any;
+  lineChart: Chart;
   constructor() { }
 
   ngAfterViewInit() {
@@ -46,5 +48,28 @@ export class Tab3Page implements AfterViewInit {
       }
     });
   }
+
+  async shareImage() {
+    this.lineChart.toBase64Image();
+    console.log(this.lineChart.toBase64Image())
+    await Share.share({
+      title: 'Grafica',
+      //url: objectURL,
+    });
+  }
+
+  
+
+shareImage2() {
+  FileSharer.share({
+      filename: "cabesa.png",
+      contentType: "image/png",
+      base64Data: this.lineChart.toBase64Image().replace(/^data:image\/[a-z]+;base64,/, ""),
+  }).then(() => {
+      // do sth
+  }).catch(error => {
+      console.error("File sharing failed", error.message);
+  });
+}
 
 }

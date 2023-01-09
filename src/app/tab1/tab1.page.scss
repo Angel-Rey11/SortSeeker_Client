@@ -1,22 +1,24 @@
 ion-content {
     .button1 {
-        margin-left: 20%;
+        margin-left: 10%;
         margin-top: 5%;
+        font-size: 22px;
     }
 
-    .button2 {
-        margin-left: 2%;
-        margin-top: 5%;
+    .primero {
+        margin-top: 40%;
     }
 
     ion-list {
-        width: 60%;
+        width: 80%;
         margin-top: 3%;
-        margin-left: 20%;
+        margin-left: 10%;
     }
+
    ion-item {
-        width: 60%;
+        width: 80%;
         margin-top: 3%;
-        margin-left: 20%;
-   }
+        margin-left: 10%;
+        font-size: 30px;
+   }   
 }

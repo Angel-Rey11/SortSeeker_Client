@@ -8,17 +8,17 @@
 
 <ion-content [fullscreen]="true">
 <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
-  <ion-item>
-    <ion-label>Minimo de elementos </ion-label>
-    <ion-input  placeholder=".." formControlName="number" type="text"></ion-input>
+  <ion-item class="primero">
+    <ion-label>Min Elements: </ion-label>
+    <ion-input formControlName="number" type="text"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Maximo de elementos </ion-label>
-    <ion-input placeholder=".." formControlName="number" type="text"></ion-input>
+    <ion-label>Max Elements: </ion-label>
+    <ion-input formControlName="number" type="text"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Incremento </ion-label>
-    <ion-input placeholder=".." formControlName="number" type="text"></ion-input>
+    <ion-label>Increment: </ion-label>
+    <ion-input formControlName="number" type="text"></ion-input>
   </ion-item>
 </form>
   <ion-list>
@@ -29,5 +29,4 @@
     </ion-item>
   </ion-list>
   <ion-button (click)="submitForm()" type="submit" class="button1"> Enviar </ion-button>
-  <ion-button class="button2" [disabled]="true">Pausar</ion-button>
 </ion-content>
