@@ -3,6 +3,9 @@ import {FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors} f
 import {LoadingController} from '@ionic/angular';
 import {SortAlgorithm} from '../model/SortAlgorithm';
 import { NavController, ToastController } from '@ionic/angular';
+import {ResultService} from "../services/result.service";
+import {RequestData} from "../model/RequestData";
+
 
 @Component({
   selector: 'app-tab1',
@@ -15,7 +18,9 @@ export class Tab1Page implements OnInit {
   optionEnum: SortAlgorithm[] = [SortAlgorithm.BUBBLE_SORT, SortAlgorithm.INSERTION_SORT,
     SortAlgorithm.MERGE_SORT, SortAlgorithm.QUICK_SORT, SortAlgorithm.SELECTOR_SORT, SortAlgorithm.SHELL_SORT];
 
-  constructor(public formBuilder: FormBuilder, private loadingCtrl: LoadingController, private toastController: ToastController,private navController: NavController) {
+  constructor(public formBuilder: FormBuilder, private loadingCtrl: LoadingController,
+              private toastController: ToastController,private navController: NavController,
+              private readonly http: ResultService) {
   }
 
   get minElements() {
@@ -44,14 +49,23 @@ export class Tab1Page implements OnInit {
       this.presentToast('bottom','danger','No se puede realizar la petición')
       return false;
     } else {
+      const rq: RequestData = {
+        minElements: this.ionicForm.value.minElements,
+        maxElements: this.ionicForm.value.maxElements,
+        step: this.ionicForm.value.increment,
+        algorithm: this.optionEnum.values().next().value,
+        date: new Date()
+      };
       this.presentToast('bottom','success','Peticion realizada correctamente')
       const loading = await this.loadingCtrl.create({
-        message: 'Realizando ordenamiento ...',
-        duration: 2000,
+        message: 'Realizando ordenamiento ...'
       });
 
       await loading.present();
+      const result = await this.http.requestSorting(rq).toPromise();
+      console.log(result);
       await loading.dismiss();
+      this.http.lastResult = result;
       this.navController.navigateForward('/tabs/tab3')
     }
   }

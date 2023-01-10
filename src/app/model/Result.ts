@@ -1,9 +1,8 @@
-import { SortAlgorithm } from "./SortAlgorithm"
+import { SortAlgorithm } from './SortAlgorithm';
 
 export interface Result {
-    id?:number
-    nElements:number
-    computedTime:number
-    multiThreaded:boolean
-    algorithm:SortAlgorithm
+    id?: number;
+    nElements: number;
+    computedTime: number;
+    algorithm: SortAlgorithm;
 }
