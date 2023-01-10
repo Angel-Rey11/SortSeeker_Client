@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
 import { Colors } from 'chart.js';
+import {ResultService} from "../services/result.service";
 
 @Component({
   selector: 'app-tab2',
@@ -10,7 +11,7 @@ import { Colors } from 'chart.js';
 })
 export class Tab2Page implements OnInit {
 
-  constructor(private toastController: ToastController,private router: Router,private navController: NavController) { }
+  constructor(private toastController: ToastController,private router: Router,private navController: NavController, private readonly http: ResultService) { }
 
   ngOnInit() {
   }

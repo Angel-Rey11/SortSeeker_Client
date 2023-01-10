@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Chart } from 'chart.js/auto';
 import { Share } from '@capacitor/share';
 import {FileSharer} from '@byteowls/capacitor-filesharer';
+import {ResultService} from "../services/result.service";
 
 @Component({
   selector: 'app-tab3',
@@ -11,7 +12,7 @@ import {FileSharer} from '@byteowls/capacitor-filesharer';
 export class Tab3Page implements AfterViewInit {
   @ViewChild('lineCanvas') private lineCanvas: ElementRef;
   lineChart: Chart;
-  constructor() { }
+  constructor( private readonly http: ResultService) { }
 
   ngAfterViewInit() {
     this.lineChartMethod();
