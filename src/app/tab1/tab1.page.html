@@ -22,7 +22,7 @@
   </ion-item>
 </form>
   <ion-list>
-    <ion-item>
+    <ion-item class="none">
       <ion-select placeholder="Algorithm">
         <ion-select-option *ngFor="let option of optionEnum | keyvalue" [value]="option.key">{{ option.value }}</ion-select-option>
       </ion-select>

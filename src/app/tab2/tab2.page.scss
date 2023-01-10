@@ -1,0 +1,16 @@
+ion-content {
+    --ion-background-color: #0F2220;
+    
+}
+
+ion-header {
+    ion-toolbar {
+      --background: #384E4B;
+      --color: white;
+      height: 60px;
+    }
+}
+
+ion-header::after {
+    display: none;
+}

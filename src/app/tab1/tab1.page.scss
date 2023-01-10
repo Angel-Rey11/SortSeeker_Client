@@ -1,4 +1,5 @@
 ion-content {
+    --ion-background-color: #0F2220;
     .button1 {
         margin-left: 10%;
         margin-top: 5%;
@@ -13,6 +14,10 @@ ion-content {
         width: 80%;
         margin-top: 3%;
         margin-left: 10%;
+        border: 1px solid #384E4B;
+        .none {
+            border: none!important;
+        }
     }
 
    ion-item {
@@ -20,5 +25,28 @@ ion-content {
         margin-top: 3%;
         margin-left: 10%;
         font-size: 30px;
-   }   
+        border: 1px solid #384E4B;
+   } 
+   
+   ion-button {
+        --background: #384E4B;
+        --background-hover: #9ce0be;
+        --background-activated: #88f4be;
+        --background-focused: #88f4be;
+        width: 40%;
+        height: 40px;
+   }
 }
+
+ion-header {
+    ion-toolbar {
+      --background: #384E4B;
+      --color: white;
+      height: 60px;
+    }
+}
+
+ion-header::after {
+    display: none;
+}
+
