@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors} from '@angular/forms';
 import {LoadingController} from '@ionic/angular';
 import {SortAlgorithm} from '../model/SortAlgorithm';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -14,7 +15,7 @@ export class Tab1Page implements OnInit {
   optionEnum: SortAlgorithm[] = [SortAlgorithm.BUBBLE_SORT, SortAlgorithm.INSERTION_SORT,
     SortAlgorithm.MERGE_SORT, SortAlgorithm.QUICK_SORT, SortAlgorithm.SELECTOR_SORT, SortAlgorithm.SHELL_SORT];
 
-  constructor(public formBuilder: FormBuilder, private loadingCtrl: LoadingController) {
+  constructor(public formBuilder: FormBuilder, private loadingCtrl: LoadingController, private toastController: ToastController,private navController: NavController) {
   }
 
   get minElements() {
@@ -40,14 +41,18 @@ export class Tab1Page implements OnInit {
   async submitForm() {
     this.isSubmitted = true;
     if (!this.ionicForm.valid) {
+      this.presentToast('bottom','danger','No se puede realizar la petición')
       return false;
     } else {
+      this.presentToast('bottom','success','Peticion realizada correctamente')
       const loading = await this.loadingCtrl.create({
         message: 'Realizando ordenamiento ...',
         duration: 2000,
       });
 
       await loading.present();
+      await loading.dismiss();
+      this.navController.navigateForward('/tabs/tab3')
     }
   }
 
@@ -55,5 +60,16 @@ export class Tab1Page implements OnInit {
     const minElements = control.get('minElements');
     const maxElements = control.get('maxElements');
     return minElements.value > maxElements.value ? {minElementsGreaterThanMaxElements: true} : null;
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', color, msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 1500,
+      position: position,
+      color: color
+    });
+
+    await toast.present();
   }
 }

@@ -7,9 +7,16 @@
 <ion-content>
   <ion-list>
     <ng-container>
+      <ion-item-sliding>
       <ion-item (click)="prueba()">
         <ion-label><h2>BUBBLE_SORT</h2><p>09/01/2023</p></ion-label>
       </ion-item>
+      <ion-item-options side="end" (ionSwipe)="this.delete(sort)">
+        <ion-item-option color="danger" expandable (click)="this.delete(sort)">
+          <ion-icon slot="icon-only" name="trash" style="zoom:1.25"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ng-container>
    </ion-list>
 </ion-content>

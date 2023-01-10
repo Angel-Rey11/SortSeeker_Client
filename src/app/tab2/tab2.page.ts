@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController, ToastController } from '@ionic/angular';
+import { Colors } from 'chart.js';
 
 @Component({
   selector: 'app-tab2',
@@ -7,13 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab2Page implements OnInit {
 
-  constructor() { }
+  constructor(private toastController: ToastController,private router: Router,private navController: NavController) { }
 
   ngOnInit() {
   }
 
   prueba() {
-    console.log("hola")
+    this.navController.navigateForward('/tabs/tab3')
+  }
+
+  public delete(sort) {
+    this.presentToast('bottom');
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'Elemento eliminado',
+      duration: 1500,
+      position: position,
+      color: 'danger'
+    });
+
+    await toast.present();
   }
 
 }
