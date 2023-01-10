@@ -40,6 +40,7 @@ export class Tab1Page implements OnInit {
       minElements: ['', [Validators.required, Validators.min(1)]],
       maxElements: ['', [Validators.required, Validators.min(1)]],
       increment: ['', [Validators.required, Validators.min(1)]],
+      algorithm: ['', [Validators.required]]
     },{validators: this.checkForm});
   }
 
@@ -53,7 +54,7 @@ export class Tab1Page implements OnInit {
         minElements: this.ionicForm.value.minElements,
         maxElements: this.ionicForm.value.maxElements,
         step: this.ionicForm.value.increment,
-        algorithm: this.optionEnum.values().next().value,
+        algorithm: this.ionicForm.value.algorithm,
         date: new Date()
       };
       this.presentToast('bottom','success','Peticion realizada correctamente')

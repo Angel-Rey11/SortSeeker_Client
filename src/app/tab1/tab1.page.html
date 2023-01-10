@@ -20,13 +20,14 @@
     <ion-label>Increment: </ion-label>
     <ion-input formControlName="increment" type="number"></ion-input>
   </ion-item>
-</form>
   <ion-list>
     <ion-item class="none">
-      <ion-select placeholder="Algorithm">
+      <ion-select placeholder="Algorithm" formControlName="algorithm">
         <ion-select-option *ngFor="let option of optionEnum | keyvalue" [value]="option.key">{{ option.value }}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
+</form>
+
   <ion-button (click)="submitForm()" type="submit" class="button1"> Submit </ion-button>
 </ion-content>

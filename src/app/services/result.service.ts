@@ -17,7 +17,7 @@ export class ResultService {
     return this.http.get<RequestResult[]>(`${environment.serverURL}/requestSort/all`);
   }
   public requestSorting(requestData: RequestData): Observable<RequestResult> {
-    return this.http.post<RequestResult>(`${environment.serverURL}/requestSort/`, requestData);
+    return this.http.post<RequestResult>(`${environment.serverURL}/requestSort`, requestData);
   }
   public deleteResult(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.serverURL}/requestSort/` + id);
