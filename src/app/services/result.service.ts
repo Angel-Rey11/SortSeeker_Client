@@ -14,12 +14,13 @@ export class ResultService {
   constructor(private readonly http: HttpClient) { }
 
   public getAllResults(): Observable<RequestResult[]> {
+    console.log('getAllResults');
     return this.http.get<RequestResult[]>(`${environment.serverURL}/requestSort/all`);
   }
   public requestSorting(requestData: RequestData): Observable<RequestResult> {
     return this.http.post<RequestResult>(`${environment.serverURL}/requestSort`, requestData);
   }
-  public deleteResult(id: number): Observable<void> {
-    return this.http.delete<void>(`${environment.serverURL}/requestSort/` + id);
+  public deleteResult(id: number) {
+    this.http.delete(`${environment.serverURL}/requestSort/${id}`).subscribe();
   }
 }

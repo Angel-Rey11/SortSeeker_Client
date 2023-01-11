@@ -3,14 +3,13 @@ import { Chart } from 'chart.js/auto';
 import {FileSharer} from '@byteowls/capacitor-filesharer';
 import {ResultService} from '../services/result.service';
 import regression from 'regression';
-import {ViewWillEnter} from "@ionic/angular";
 
 @Component({
   selector: 'app-tab3',
   templateUrl: './tab3.page.html',
   styleUrls: ['./tab3.page.scss'],
 })
-export class Tab3Page implements AfterViewInit,ViewWillEnter{
+export class Tab3Page implements AfterViewInit{
   @ViewChild('lineCanvas') private lineCanvas: ElementRef;
   lineChart: Chart;
   data;
@@ -83,14 +82,5 @@ export class Tab3Page implements AfterViewInit,ViewWillEnter{
     }).catch(error => {
         console.error('File sharing failed', error.message);
     });
-  }
-
-  ionViewWillEnter(): void {
-    const canvasElement = document.getElementById('lineCanvas');
-    const parent = canvasElement.parentNode;
-    this.renderer.removeChild(parent, canvasElement);
-    this.lineCanvas = document.createElement('canvas');
-    this.renderer.appendChild(parent, this.lineCanvas);
-    this.lineChartMethod();
   }
 }

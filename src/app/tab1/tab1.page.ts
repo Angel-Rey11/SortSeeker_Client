@@ -57,7 +57,7 @@ export class Tab1Page implements OnInit {
         algorithm: this.ionicForm.value.algorithm,
         date: new Date()
       };
-      this.presentToast('bottom','success','Peticion realizada correctamente')
+      this.presentToast('bottom','success','Peticion realizada correctamente');
       const loading = await this.loadingCtrl.create({
         message: 'Realizando ordenamiento ...'
       });
@@ -67,7 +67,7 @@ export class Tab1Page implements OnInit {
       console.log(result);
       await loading.dismiss();
       this.http.lastResult = result;
-      this.navController.navigateForward('/tabs/tab3')
+      this.navController.navigateForward('/tabs/tab3');
     }
   }
 

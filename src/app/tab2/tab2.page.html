@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <ng-container *ngFor="let sort of this.sort$ | async">
+    <ng-container *ngFor="let sort of this.sort">
       <ion-item-sliding>
       <ion-item (click)="viewGraph(sort)">
         <ion-label><h2>{{sort.requestData.algorithm}}</h2><p>{{sort.id}}</p><p>{{sort.requestData.minElements}}</p><p>{{sort.requestData.maxElements}}</p><p>{{sort.requestData.step}}</p><p>{{sort.requestData.date}}</p></ion-label>

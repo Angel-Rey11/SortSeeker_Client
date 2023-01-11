@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import {LoadingController, NavController, ToastController, ViewWillEnter} from '@ionic/angular';
 import { Colors } from 'chart.js';
 import { Observable } from 'rxjs';
 import { RequestResult } from '../model/RequestResult';
@@ -11,10 +11,15 @@ import {ResultService} from "../services/result.service";
   templateUrl: './tab2.page.html',
   styleUrls: ['./tab2.page.scss'],
 })
-export class Tab2Page implements OnInit {
+export class Tab2Page implements OnInit,ViewWillEnter {
   private loading:HTMLIonLoadingElement;
-  public sort:Observable<RequestResult[]>;
+  public sort2:Observable<RequestResult[]>;
+  public sort: RequestResult[];
   constructor(private loadingCtrl: LoadingController,private toastController: ToastController,private router: Router,private navController: NavController, private readonly http: ResultService) { }
+
+  async ionViewWillEnter() {
+     this.sort = await this.http.getAllResults().toPromise();
+    }
 
   public async showLoading(msg?){
     if(this.loading) return;
@@ -31,9 +36,8 @@ export class Tab2Page implements OnInit {
   }
 
   async ngOnInit() {
-    await this.showLoading();
-    this.sort = await this.http.getAllResults();
-    this.hideLoading();
+    this.sort = await this.http.getAllResults().toPromise();
+    console.log(this.sort);
   }
 
   viewGraph(sort:RequestResult) {
@@ -43,6 +47,7 @@ export class Tab2Page implements OnInit {
 
   public delete(sort:RequestResult) {
     this.http.deleteResult(sort.id);
+    this.sort = this.sort.filter(s => s.id !== sort.id);
     this.presentToast('bottom');
   }
 
