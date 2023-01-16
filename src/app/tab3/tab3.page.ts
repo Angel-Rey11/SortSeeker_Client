@@ -3,14 +3,16 @@ import { Chart } from 'chart.js/auto';
 import {FileSharer} from '@byteowls/capacitor-filesharer';
 import {ResultService} from '../services/result.service';
 import regression from 'regression';
+import {ViewDidEnter} from "@ionic/angular";
 
 @Component({
   selector: 'app-tab3',
   templateUrl: './tab3.page.html',
   styleUrls: ['./tab3.page.scss'],
 })
-export class Tab3Page implements AfterViewInit{
+export class Tab3Page implements AfterViewInit,ViewDidEnter{
   @ViewChild('lineCanvas') private lineCanvas: ElementRef;
+  @ViewChild('content') private invento: ElementRef;
   lineChart: Chart;
   data;
   options;
@@ -48,29 +50,38 @@ export class Tab3Page implements AfterViewInit{
       };
       this.options = {
         responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          xAxes: [{
-            display: true
-          }],
-          yAxes: [{
-            display: true
-          }],
-        }
+        maintainAspectRatio: false
       };
     }
   }
 
   ngAfterViewInit() {
+    console.log('ngAfterViewInit');
     this.chartInitialization();
     this.lineChartMethod();
   }
 
   lineChartMethod() {
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+    const div = document.getElementById("contenido");
+    console.log(div);
+    div.innerHTML='';
+/*try {
+  this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+    type: 'line',
+    data: this.data, options: this.options
+  });
+}catch (e) {}*/
+
+    const canvas = document.createElement("canvas");
+    div.appendChild(canvas);
+    try{
+    this.lineChart = new Chart(canvas, {
       type: 'line',
       data: this.data ,options: this.options
     });
+    }catch (e) {}
+
+
   }
   shareImage2() {
     FileSharer.share({
@@ -82,5 +93,11 @@ export class Tab3Page implements AfterViewInit{
     }).catch(error => {
         console.error('File sharing failed', error.message);
     });
+  }
+
+  ionViewDidEnter(): void {
+    console.log('ionViewDidEnter');
+    this.chartInitialization();
+    this.lineChartMethod();
   }
 }

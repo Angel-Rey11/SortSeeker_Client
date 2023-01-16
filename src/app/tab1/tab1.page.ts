@@ -5,6 +5,7 @@ import {SortAlgorithm} from '../model/SortAlgorithm';
 import { NavController, ToastController } from '@ionic/angular';
 import {ResultService} from "../services/result.service";
 import {RequestData} from "../model/RequestData";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -20,7 +21,7 @@ export class Tab1Page implements OnInit {
 
   constructor(public formBuilder: FormBuilder, private loadingCtrl: LoadingController,
               private toastController: ToastController,private navController: NavController,
-              private readonly http: ResultService) {
+              private readonly http: ResultService,private router:Router) {
   }
 
   get minElements() {
@@ -67,7 +68,7 @@ export class Tab1Page implements OnInit {
       console.log(result);
       await loading.dismiss();
       this.http.lastResult = result;
-      this.navController.navigateForward('/tabs/tab3');
+      this.router.navigate(['/tabs/tab3']);
     }
   }
 

@@ -42,7 +42,7 @@ export class Tab2Page implements OnInit,ViewWillEnter {
 
   viewGraph(sort:RequestResult) {
     this.http.lastResult = sort;
-    this.navController.navigateForward('/tabs/tab3')
+    this.router.navigate(['/tabs/tab3']);
   }
 
   public delete(sort:RequestResult) {
